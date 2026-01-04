@@ -54,9 +54,9 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Push to Docker Hub
-    if: github.ref == 'refs/heads/main'
-    run: |
-      docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.get_image_name.outputs.IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+      if: github.ref == 'refs/heads/main'
+      run: |
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.get_image_name.outputs.IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
 
 #    # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
 #    - name: Update dependency graph
