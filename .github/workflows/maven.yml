@@ -53,7 +53,7 @@ jobs:
     - name: Push Image docker
       if: github.ref == 'refs/head/main'
       run: |
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{steps.get_image_name.outputs.IMAGE_NAMEd}}:${{steps.get_version.outputs.VERSION}}
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.get_image_name.outputs.IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
 
 
 #    # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
