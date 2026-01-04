@@ -44,7 +44,7 @@ jobs:
     - name: Build maven
       run: mvn clean package install --file pom.xml
 
-    - name: Build maven
+    - name: Docker Image
       run: mvn spring-boot:build-image --file pom.xml
 
     - name: Docker-Login
@@ -53,11 +53,10 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: Push Image docker
-      if: github.ref == 'refs/head/main'
-      run: |
-        docker push pavankalyan0499/${{ steps.get_image_name.outputs.IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
-
+    - name: Push to Docker Hub
+    if: github.ref == 'refs/heads/main'
+    run: |
+      docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.get_image_name.outputs.IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
 
 #    # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
 #    - name: Update dependency graph
